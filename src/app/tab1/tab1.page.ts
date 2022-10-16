@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,15 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  constructor(private alertController: AlertController) {}
 
+  async exibirAlertaFavorito() {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: 'Deseja mesmo favoritar esse filme?',
+      buttons: ['Cancelar', 'Confirmar'],
+    });
+
+    await alert.present();
+  }
 }
