@@ -11,46 +11,21 @@
 
   <ion-list>
 
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let video of listaVideos">
       <ion-item lines="full">
         <ion-thumbnail slot="start">
-          <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg"/>
+          <img [src]="video.cartaz"/>
         </ion-thumbnail>
         <ion-label class="ion-text-wrap">
           <div>
-            <h1>Morbius (2022)</h1>
-            <p>31/03/2022 (BR) - 1h 45m</p>
-            <p>Ação, Ficção científica, Fantasia</p>
+            <h1>{{ video.nome }}</h1>
+            <p>{{ video.lancamento }} - {{ video.duracao }}</p>
+            <ion-badge color="light" *ngFor="let genero of video.generos">{{ genero }}</ion-badge>
           </div>
         </ion-label>
 
-        <ion-chip color="warning" outline>
-          <ion-label>63%</ion-label>
-        </ion-chip>
-      </ion-item>
-
-      <ion-item-options slot="end">
-        <ion-item-option color="light" (click)="exibirAlertaFavorito()">
-          <ion-icon slot="icon-only" name="star" color="laranja"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-
-    <ion-item-sliding>
-      <ion-item lines="full">
-        <ion-thumbnail slot="start">
-          <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/sQN9v8dIkEYtrGhLULweNNKONHg.jpg"/>
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <div>
-            <h1>DC Liga dos Superpets (2022)</h1>
-            <p>28/07/2022 (BR) - 1h 45m</p>
-            <p>Animação, Ação, Família, Comédia, Ficção científica</p>
-          </div>
-        </ion-label>
-
-        <ion-chip color="success" outline>
-          <ion-label>75%</ion-label>
+        <ion-chip [color]="video.avaliacao > 70 ? 'success' : video.avaliacao > 40 ? 'warning' : 'danger'" outline>
+          <ion-label>{{ video.avaliacao }}%</ion-label>
         </ion-chip>
       </ion-item>
 
