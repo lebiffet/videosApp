@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { IFilme } from '../models/IFilme.model';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,25 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+
+  listaVideos: IFilme[] = [
+    {
+      nome: 'Morbius (2022)',
+      cartaz: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg',
+      duracao: '1h 45m',
+      lancamento: '31/03/2022 (BR)',
+      avaliacao: 63,
+      generos: ['Ação', 'Ficção científica', 'Fantasia']
+    },
+    {
+      nome: 'DC Liga dos Superpets (2022)',
+      cartaz: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/sQN9v8dIkEYtrGhLULweNNKONHg.jpg',
+      duracao: '1h 45m',
+      lancamento: '28/07/2022 (BR)',
+      avaliacao: 75,
+      generos: ['Animação', 'Ação', 'Família', 'Comédia', 'Ficção científica']
+    }
+  ];
 
   constructor(private alertController: AlertController, private toastController: ToastController) {}
 
