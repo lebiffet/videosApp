@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IFilme } from '../models/IFilme.model';
+import { DadosService } from '../services/dados.service';
 
 @Component({
   selector: 'app-filme',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilmePage implements OnInit {
 
-  constructor() { }
+  filme: IFilme;
+
+  constructor(public dadosService: DadosService) { }
 
   ngOnInit() {
+    this.filme = this.dadosService.pegarDados('filme');
   }
 
 }
