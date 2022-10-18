@@ -111,5 +111,7 @@ export class Tab1Page implements OnInit{
         this.generos[genero.id] = genero.name;
       });
     });
+
+    this.dadosService.guardarDados('generos', this.generos);
   }
 }
