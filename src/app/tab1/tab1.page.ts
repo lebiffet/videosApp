@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { IFilme } from '../models/IFilme.model';
 import { DadosService } from '../services/dados.service';
 import { FilmeService } from '../services/filme.service';
 import { IFilmeAPI, IListaFilmes } from '../models/IFilmeAPI.model';
+import { GeneroService } from '../services/genero.service';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit{
 
   listaVideos: IFilme[] = [
     {
@@ -42,11 +43,14 @@ export class Tab1Page {
 
   listaFilmes: IListaFilmes;
 
+  generos: string[] = [];
+
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
     private dadosService: DadosService,
     private filmeService: FilmeService,
+    private generoService: GeneroService,
     public router: Router
   ) {}
 
@@ -98,5 +102,14 @@ export class Tab1Page {
     });
 
     await toast.present();
+  }
+
+  ngOnInit(): void {
+    this.generoService.buscarGeneros().subscribe(dados => {
+      console.log(dados);
+      dados.genres.forEach(genero => {
+        this.generos[genero.id] = genero.name;
+      });
+    });
   }
 }
