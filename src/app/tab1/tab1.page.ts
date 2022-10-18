@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { IFilme } from '../models/IFilme.model';
 import { DadosService } from '../services/dados.service';
+import { FilmeService } from '../services/filme.service';
+import { IListaFilmes } from '../models/IFilmeAPI.model';
 
 @Component({
   selector: 'app-tab1',
@@ -38,12 +40,29 @@ export class Tab1Page {
     }
   ];
 
+  listaFilmes: IListaFilmes;
+
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
     private dadosService: DadosService,
+    private filmeService: FilmeService,
     public router: Router
   ) {}
+
+  buscarFilmes(evento: any) {
+    console.log(evento.target.value);
+
+    const busca = evento.target.value;
+
+    if (busca && busca.trim() !== '') {
+      this.filmeService.buscarFilmes(busca).subscribe(dados => {
+        console.log(dados);
+        this.listaFilmes = dados;
+      });
+    }
+
+  }
 
   exibirFilme(filme: IFilme) {
     this.dadosService.guardarDados('filme', filme);

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { IListaFIlmes } from '../models/IFilmeAPI.model';
+import { IListaFilmes } from '../models/IFilmeAPI.model';
 import { ToastController } from '@ionic/angular';
 
 @Injectable({
@@ -18,10 +18,10 @@ export class FilmeService {
 
   constructor(private http: HttpClient, private toastController: ToastController) { }
 
-  buscarFilmes(busca: string): Observable<IListaFIlmes> {
+  buscarFilmes(busca: string): Observable<IListaFilmes> {
     const url = `${this.apiURL}search/movie${this.key}&language=${this.linguagem}&region=${this.regiao}&query=${busca}`;
 
-    return this.http.get<IListaFIlmes>(url).pipe(
+    return this.http.get<IListaFilmes>(url).pipe(
       map(retorno => retorno),
       catchError(erro => this.exibirErro())
     );
